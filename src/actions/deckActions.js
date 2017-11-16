@@ -44,35 +44,6 @@ export function deleteDeck (deckId, cardIds) {
   }
 }
 
-// export function fetchPublicDecks (deckId, cardIds) {
-//   return (dispatch) => {
-//     fetch(`http://localhost:3000/api/v1/decks/${deckId}`, {
-//       method: 'get',
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${localStorage.getItem('token')}`
-//       }
-//     })
-//     .then(resp => resp.json())
-//     .then(json => {
-//       if (!json.message){
-//         debugger;
-//         dispatch(setPublicDecks())
-//       } else {
-//         alert(json.message)
-//       }
-//     })
-//   }
-// }
-//
-// function setPublicDecks (data) {
-//   return {
-//     type: 'CREATE_DECK_AND_CARDS',
-//     publicDecks: data.decks,
-//     publicCards: data.cards
-//   }
-// }
 
 function setDeck (data) {
   return {

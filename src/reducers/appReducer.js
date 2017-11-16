@@ -2,11 +2,15 @@ import { combineReducers } from 'redux'
 import userReducer from './userReducer'
 import deckReducer from './deckReducer'
 import cardReducer from './cardReducer'
+import publicDeckReducer from './publicDeckReducer'
+import publicCardReducer from './publicCardReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
     decks: deckReducer,
-    cards: cardReducer
+    cards: cardReducer,
+    publicDecks: publicDeckReducer,
+    publicCards: publicCardReducer
   })
 
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loginUser } from '../actions/loginUser.js'
+import { fetchPublicDecks } from '../actions/publicDeckActions.js'
 
 class LoginForm extends React.Component{
 
@@ -38,4 +39,4 @@ class LoginForm extends React.Component{
   }
 }
 
-export default connect(null, { loginUser })(LoginForm)
+export default connect(null, { loginUser, fetchPublicDecks })(LoginForm)

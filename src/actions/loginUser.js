@@ -15,7 +15,9 @@ export function loginUser(user, action) {
     .then(json => {
       if (!json.message){
         if (action === 'signup') {
-          debugger;
+          dispatch(setCurrentUser(json.username, json.id))
+          localStorage.setItem('token', json.jwt )
+        } else if (action === 'login' && json.decks.length === 0) {
           dispatch(setCurrentUser(json.username, json.id))
           localStorage.setItem('token', json.jwt )
         }
@@ -48,6 +50,7 @@ export function reauthenticateUser(){
         if (!json.message){
           if (json.decks.length === 0 ) {
             dispatch(setCurrentUser(json.username, json.id))
+
           } else {
             let normalizedData = decksNormalizer(json.decks)
             dispatch(setDecksandCards(normalizedData.entities))

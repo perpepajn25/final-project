@@ -12,7 +12,7 @@ class MySidebar extends React.Component {
     const { activeItem } = this.state
 
     const { id } = this.props.match.params
-    if (id === "new") {
+    if (id === "new" || id === 'public') {
       /// typeof
       return null
     } else {
