@@ -1,28 +1,268 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.ui.logout {
+  background-color: #F6B142 !important;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.ui.navbar {
+  background-color: #1C4D59 !important;
+  margin-top: 15px !important;
+  box-shadow: none !important;
 }
 
-.App-intro {
-  font-size: large;
+.menu-logo-parent {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  top: -12px;
+  left: -10%
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.menu-logo-parent img {
+  width: 100%;
+}
+
+.menu-item {
+  margin: 0;
+}
+
+.subject-logos {
+  height: 75px !important;
+  width: 75px !important;
+  margin-top: 5px;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  left: 10%;
+}
+
+.container {
+  padding-top: 3%;
+}
+
+.deck {
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  border-style: solid;
+  border-color: #F6B142;
+  box-shadow:  3px 3px #888888;
+  border-radius: 30px;
+  margin: 10px;
+  padding-top: 10px;
+}
+
+.deck:hover {
+  box-shadow: inset 3px 3px #888888;
+}
+
+.create-deck-container {
+  text-align: center;
+  display: flex;
+  vertical-align: middle;
+}
+
+.create-deck-form {
+  left: 26% !important;
+  padding-top: 4%;
+}
+
+.delete-field-button {
+  margin-top: 6% !important;
+  height: 30px !important;
+  background-color: #d8ba88!important;
+  color:  #ED5E3C !important
+}
+
+.form-field-label {
+  margin-top: 7.5% !important;
+}
+
+.privacy-toggle {
+  margin-top: 6% !important;
+  margin-left: 7% !important
+}
+
+.subject-dropdown {
+  margin-left: 5% !important
+}
+
+.search-decks {
+  background-color: #d8ba88 !important;
+  color: white !important
+}
+
+.search-decks::placeholder {
+  color: white !important;
+}
+
+.search-decks-div {
+  margin-top: 3%
+}
+
+.edit-card {
+  left: 26.5% !important;
+  margin: 1% !important
+}
+
+.cust-button {
+  margin-top: 2.2% !important;
+  height: 30px !important;
+}
+
+.edit-button {
+  background-color: #b8c4bc !important;
+  color: #56705e !important
+}
+
+.delete-button {
+  background-color: #d8ba88 !important;
+  color:  #ED5E3C !important
+}
+
+.answer {
+  float: right;
+  position: relative;
+  width: 40%;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.question {
+  display: inline-block;
+  float: left;
+  position: relative;
+  width: 60%;
+  border-right: thin black solid;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+
+.homepage-card {
+  word-wrap: break-word;
+  display: inline-block;
+  background-color: white;
+  border: solid;
+  border-color: silver;
+  width: 50%;
+  margin: 10px;
+  border-radius: 10px !important;
+}
+
+.card-buttons {
+  text-align: right !important;
+  padding-top: 1%;
+}
+
+.my-sidebar {
+  position: fixed;
+  background-color: #378485 !important;
+  width: 8% !important;
+  margin-left: 1% !important;
+  margin-top: 3% !important
+}
+
+.deck-title {
+  background-color: white;
+  width: 30%;
+  display: inline-block;
+  margin: 2%;
+  border-radius: 10px;
+  padding: 1%;
+  color: black;
+  border: solid;
+  border-color: silver;
+}
+
+.deck-buttons {
+  position: relative;
+  left: 400px;
+  margin-top: 1%;
+}
+
+.flip-card {
+  background-color: white;
+  border-radius: 10px;
+  height: 150px;
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  border-color: silver;
+  padding: 4px;
+}
+
+.flip-card:hover {
+  border-style: solid;
+  border-color: #F6B142;
+}
+
+.flip-card-content p {
+  width: 97%;
+  font-size: 27px;
+  font-family: Georgia, serif;
+}
+
+.flip-card-single {
+  background-color: white;
+  border-radius: 10px;
+  height: 300px;
+  width: 350px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  border-color: silver;
+  left: 50%;
+  padding: 10px;
+}
+
+.flip-card-single:hover {
+  border-style: solid;
+  border-color: #F6B142;
+}
+
+.single-card-containter {
+  display: inline-block;
+  margin-top: 4%
+}
+
+.game-card {
+  overflow: scroll;
+  background-color: white;
+  border-radius: 10px;
+  height: 100px;
+  width: 125px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  border-color: silver;
+  padding: 4px;
+}
+
+.game-cards-container {
+  display: flex;
+  margin-top: 4%
+}
+
+.vertical-column {
+  width: 50%;
+  position: absolute;
+  margin-left: 3%
+}
+
+.blank-div {
+  border-radius: 10px;
+  height: 100px;
+  width: 125px;
+  margin: 10px;
+  display: flex;
 }

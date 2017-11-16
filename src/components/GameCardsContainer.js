@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import GameCardAnswers from './GameCardAnswers'
 import GameCardQuestions from './GameCardQuestions'
 
@@ -67,15 +66,17 @@ class GameCardsContainer extends React.Component {
     })
     return (
       <div>
-        <Link to='/decks'> Home </Link>
-        <Link to={`/decks/${this.props.deck.id}`}> Deck </Link>
-        <h1> {this.state.attempts} </h1>
-        <div className="container">
-          <div className="flex-container">
-            answers
-            {answers}
-            questions
+        <h1> Attempts: {this.state.attempts} </h1>
+        <div className="container vertical-column">
+          <h3> Q. </h3>
+          <div className='flex-container'>
             {questions}
+          </div>
+        </div>
+        <div className="container vertical-column" style={{left: '50%'}}>
+          <h3> A. </h3>
+          <div className='flex-container'>
+          {answers}
           </div>
         </div>
       </div>

@@ -29,7 +29,10 @@ export default function deckReducer(state = {byId:{}, allId: []} , action){
       delete filteredDecks[action.deckId]
       return {
         ...state,
-        byId: filteredDecks
+        byId: filteredDecks,
+        allId: state.allId.filter((deckId)=>{
+          return deckId !== action.deckId
+        })
       }
 
     case 'ADD_CARD':

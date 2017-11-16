@@ -2,15 +2,28 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createDeck } from '../actions/deckActions.js'
 import { withRouter } from 'react-router-dom'
+import { Button, Divider, Form } from 'semantic-ui-react'
+
+const options = [
+          { key: 'math', text: 'Mathematics', value: 'Mathematics' },
+          { key: 'lang arts', text: 'Language Arts', value: 'Language Arts' },
+          { key: 'art', text: 'Art', value: 'Art' },
+          { key: 'social studies', text: 'Social Studies', value: 'Social Studies' },
+          { key: 'foreign language', text: 'Foreign Language', value: 'Foreign Language' },
+          { key: 'science', text: 'Science', value: 'Science' },
+          { key: 'computer science', text: 'Computer Science', value: 'Computer Science' },
+          { key: 'other', text: 'Other', value: 'Other' }
+        ]
 
 class NewDeckForm extends Component{
 
   state = {
     counter: 5,
     title: '',
-    public: false,
     cards: {},
-    cardIds: [1,2,3,4,5]
+    cardIds: [1,2,3,4,5],
+    public: true,
+    subject: ''
   }
 
   handleAddCardField = (event) => {
@@ -23,10 +36,22 @@ class NewDeckForm extends Component{
     }
   }
 
-  handleTitleChange = (event) => {
-    this.setState({
-      title: event.target.value
-    })
+  handleChange = (event,key) => {
+    if (key === 'subject') {
+      this.setState({
+        subject: event.target.innerText
+      })
+    } else if (key === 'title'){
+      this.setState({
+        title: event.target.value
+      })
+    } else if (key === 'public') {
+      setTimeout(()=>{
+        this.setState({
+          public: !this.state.public
+        })
+      }, 100)
+    }
   }
 
   handleCardChange=(event,key)=>{
@@ -48,7 +73,9 @@ class NewDeckForm extends Component{
     })
     let deck = {
       title: this.state.title,
-      cards: filteredCards
+      cards: filteredCards,
+      public: this.state.public,
+      subject:this.state.subject
     }
     if (this.state.title.trim()){
     this.props.createDeck(deck)
@@ -72,12 +99,12 @@ class NewDeckForm extends Component{
     return this.state.cardIds.map((cardId,i)=> {
       return (
         <div id={cardId} key={cardId}>
-          <label>{i+1}</label>
-          <label>Question</label>
-          <input data-id={cardId} type='text' onChange={(event)=>{this.handleCardChange(event, 'question')}}/>
-          <label>Answer</label>
-          <input data-id={cardId} type='text' onChange={(event)=>{this.handleCardChange(event, 'answer')}} />
-          <button data-id={cardId} onClick={this.removeCardField}> x </button>
+          <Form.Group>
+          <h4 className='form-field-label'>{i+1}.</h4>
+            <Form.TextArea data-id={cardId} label='question' control='input' placeholder='enter question' onChange={(event)=>{this.handleCardChange(event, 'question')}} />
+            <Form.TextArea data-id={cardId} label='answer' control='input' placeholder='enter answer' onChange={(event)=>{this.handleCardChange(event, 'answer')}}/>
+          <Button className='delete-field-button' icon='delete' size='small' data-id={cardId} onClick={this.removeCardField}/>
+          </Form.Group>
         </div>
       )
     })
@@ -86,69 +113,21 @@ class NewDeckForm extends Component{
 
   render(){
     return(
-      <div>
-        <form id="create-deck">
-          <label>Title</label>
-          <input type='text' onChange={this.handleTitleChange} />
-          {this.generateInputFields()}
-          <button onClick={this.handleAddCardField}> + card </button>
-          <button onClick={this.handleCreateDeck}> create deck </button>
-        </form>
+      <div className='create-deck-container'>
+        <Form onSubmit={this.handleCreateDeck} className='create-deck-form' size='large' id='create-deck'>
+          <Form.Field label='title' control='input' placeholder='enter title'  onChange={(event)=> {this.handleChange(event, 'title')}}/>
+          <Form.Group>
+            <Form.Select className='subject-dropdown' label='Subject' options={options} placeholder='Subject' onChange={(event)=> {this.handleChange(event, 'subject')}}/>
+            <Form.Radio  className='privacy-toggle' toggle label={this.state.public ? 'Public' : 'Private'} onChange={(event)=>{this.handleChange(event, 'public')}}/>
+          </Form.Group>
+            {this.generateInputFields()}
+            <Button onClick={this.handleAddCardField}> + Card </Button>
+          <Divider />
+          <Button type='submit'> Create Deck </Button>
+        </Form>
       </div>
     )
   }
 }
 
 export default withRouter(connect(null, { createDeck })(NewDeckForm))
-
-//
-// class FormItem extends Component {
-//
-//
-//   state = {
-//     answer: "",
-//     question: ""
-//   }
-//
-//
-//   handleCardChange = (event, key) => {
-//     // I want to validate
-//     //  if im an answer i want to question etc
-//
-//     this.setState({
-//       [key]: event.target.value
-//     })
-//     //
-//     //
-//     // if (this.checkValid()) {
-//     //   this.props.handleAdd(this.state, this.props.id)
-//     // } else {
-//     //   this.props.handleRemove(this.props.id)
-//     // }
-//
-//     /// validate complete form
-//   }
-//
-//
-//   checkValid = () => {
-//     if (this.state.question !== "" && this.state.answer !== "") {
-//       return true
-//     } else {
-//       return false
-//     }
-//   }
-//
-//   render() {
-//     const { id } = this.props
-//     return (
-//       <div id={id} key={id}>
-//         <label>{id}</label>
-//         <label>Question</label>
-//         <input data-id={id} type='text' onChange={(event)=>{this.handleCardChange(event, 'question')}} value={this.state.question}/>
-//         <label>Answer</label>
-//         <input data-id={id} type='text' onChange={(event)=>{this.handleCardChange(event, 'answer')}} value={this.state.answer} />
-//         <button data-id={id} onClick={this.removeCardField}> x </button>
-//       </div>
-//     )
-//   }
-// }

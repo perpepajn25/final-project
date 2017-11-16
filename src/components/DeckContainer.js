@@ -1,7 +1,6 @@
 import React from 'react'
 import Deck from './Deck'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 class DeckContainer extends React.Component{
 
@@ -25,12 +24,18 @@ class DeckContainer extends React.Component{
     })
     return (
       <div>
-      <Link to='/decks/new'> Create Deck </Link>
-        <input onChange={this.handleChange}
-        type="text"
-        placeholder={"Search your Decks"}
-      value={this.state.input}/>
-      {decks}
+        <div className='ui icon input search-decks-div'>
+          <input className='search-decks' onChange={this.handleChange}
+            type='text'
+            placeholder={'Search your Dex by Title or Category'}
+            value={this.state.input}/>
+          <i className='circular search link icon'></i>
+        </div>
+        <div className='container'>
+          <div className='flex-container'>
+            {decks}
+          </div>
+        </div>
       </div>
     )
   }

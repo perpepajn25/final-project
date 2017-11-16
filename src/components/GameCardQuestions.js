@@ -9,7 +9,7 @@ class GameCardQuestions extends React.Component {
 
   render(){
     return(
-        this.props.solved ? <div className="item"> solved! </div> : <div onClick={this.selectQuestion}> <div> {this.props.question} </div> </div>
+        this.props.solved ? <div className="blank-div"> </div> : <div className='game-card' onClick={this.selectQuestion} style={this.props.selected ? {border: 'solid orange'} : null}> <div> {this.props.question} </div> </div>
     )
   }
 }

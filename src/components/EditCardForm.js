@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { editCard } from '../actions/cardActions.js'
 import { withRouter } from 'react-router-dom'
+import { Button, Form } from 'semantic-ui-react'
 
 class EditCardForm extends React.Component{
   state = {
@@ -31,16 +32,18 @@ class EditCardForm extends React.Component{
 
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Question</label>
-          <input type='text' name='question' value={this.state.question} onChange={(event) => {this.handleChange(event,'question')}}/>
-          <label>Answer</label>
-          <input type='text' name='answer' value={this.state.answer} onChange={(event) => {this.handleChange(event,'answer')}}/>
-          <button> Edit Card </button>
-        </form>
-        <button onClick={this.handleCancel}> cancel </button>
-      </div>
+      <Form className='edit-card'>
+        <Form.Group >
+          <Form.TextArea
+            label='question' value={this.state.question} control='input' placeholder='enter   question' onChange={(event)=>{this.handleChange(event, 'question')}} />
+          <Form.TextArea
+            label='answer' value={this.state.answer} control='input' placeholder='enter answer' onChange={(event)=>{this.handleChange(event, 'answer')}}/>
+          <Button
+            className='cust-button edit-button' icon='save' size='tiny' onClick={this.handleSubmit}/>
+          <Button
+            className='cust-button delete-button' icon='delete' size='tiny' onClick={this.handleCancel}/>
+          </Form.Group>
+      </Form>
     )
   }
 }

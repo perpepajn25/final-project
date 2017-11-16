@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import HomePageCard from './HomePageCard'
 import { Link, withRouter } from 'react-router-dom'
 import { deleteDeck } from '../actions/deckActions.js'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 class HomepageCardContainer extends React.Component {
 
   handleDeleteDeck = (event) => {
-    this.props.deleteDeck(this.props.deck.id, this.props.cards.allId)
+    this.props.deleteDeck(this.props.deck.id, this.props.deck.cards)
     this.props.history.push('/decks')
   }
 
@@ -19,15 +20,31 @@ class HomepageCardContainer extends React.Component {
     return (
 
       <div>
-      <button onClick={this.handleDeleteDeck}> Delete </button>
-      <Link to='/decks'> Home </Link>
-      <Link to={`/decks/${this.props.deck.id}/cards/new`}> Add New Card </Link>
-      <Link to={`/decks/${this.props.deck.id}/flashcards`}> Flashcards </Link>
-      <Link to={`/decks/${this.props.deck.id}/write`}> Written Quiz </Link>
-      <Link to={`/decks/${this.props.deck.id}/match`}> Match </Link>
-      <h4> Stars: {this.props.deck.starCount} </h4>
-      <h4> Forks: {this.props.deck.forkCount} </h4>
-       {cards}
+        <div className='deck-buttons' display='none'>
+          <Button size='tiny' onClick={this.handleDeleteDeck} > <Icon name='delete'/> delete deck </Button>
+          <Link to={`/decks/${this.props.deck.id}/cards/new`}> <Button size='tiny'> <Icon name='add'/>add new card </Button> </Link>
+        </div>
+        <div className='deck-title'>
+          <h2> {this.props.deck.title} </h2>
+        </div>
+      <div>
+          <Button
+            color='yellow'
+            content='Stars'
+            icon='star'
+            label={{ basic: true, color: 'yellow', pointing: 'right', content: this.props.deck.starCount }}
+            labelPosition='left'
+          />
+          <Button
+            color='teal'
+            content='Forks'
+            icon='fork'
+            label={{ basic: true, color: 'teal', pointing: 'left', content: this.props.deck.forkCount  }}
+            labelPosition='right'
+            />
+          <Icon/>
+        </div>
+        {cards}
       </div>
     )
   }

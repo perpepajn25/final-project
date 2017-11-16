@@ -1,46 +1,77 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { Grid, Button, Form, Icon } from 'semantic-ui-react'
 
 
 class WrittenCardsContainer extends React.Component {
 
   state = {
     counter: 0,
-    input: ''
+    answer: '',
+    comparing: false
   }
 
 
   handleSubmit = (event) => {
     event.preventDefault()
     this.setState({
-      input: ''
+      comparing: true
     })
   }
 
-  handleNext = (event) => {
+  handleChange = (event) => {
     this.setState({
-      counter: this.state.counter+1,
-      input: ''
+      answer: event.target.value
     })
   }
+
+  handleNext = () => {
+    this.setState({
+      counter: this.state.counter + 1,
+      answer: '',
+      comparing: false
+    })
+  }
+
+  handleBack = () => {
+    this.setState({
+      counter: this.state.counter - 1,
+      answer: '',
+      comparing: false
+    })
+  }
+
 
   render(){
     let cardId = this.props.deck.cards[this.state.counter]
     let card = this.props.cards.byId[cardId]
     return (
-      <div>
-      <Link to='/decks'> Home </Link>
-      <Link to={`/decks/${this.props.deck.id}`}> Deck </Link>
-        <div>
-          {card.question}
-        </div>
-        <div>
-          <form>
-            <input type='text'/>
-            <button onClick={this.handleSubmit}> submit answer </button>
-          </form>
-        </div>
+      <div className='single-card-containter'>
+        <Grid.Row>
+          <div className='flip-card-single' onClick={this.handleFlip}>
+            <div className='flip-card-content'> <h4>Q.</h4>  <p>{card.question}</p></div>
+         </div>
+       </Grid.Row>
+        <Grid.Row>
+          {this.state.comparing ? (
+            <div>
+               <h3> You're Answer: {this.state.answer}</h3>
+              {this.state.answer.toLowerCase().trim() === card.answer.toLowerCase().trim() ? <Icon name='checkmark box'/> : <Icon name='x'/>}
+               <h3> Correct Answer: {card.answer}</h3>
+               {this.state.counter === this.props.deck.cards.length-1 ? <Button onClick={this.handleBack}> repeat Quiz </Button> :
+               <Button onClick={this.handleNext}> next </Button>}
+             </div>) : (
+            <div>
+               <Form>
+                 <Form.TextArea
+                    value={this.state.answer} control='input' placeholder='enter answer' onChange={this.handleChange}/>
+                  <Button onClick={this.handleSubmit}> answer </Button>
+               </Form>
+            </div>
+      )
+      }
+      </Grid.Row>
       </div>
     )
   }

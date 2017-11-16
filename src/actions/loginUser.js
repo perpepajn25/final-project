@@ -14,10 +14,17 @@ export function loginUser(user, action) {
     .then(resp => resp.json())
     .then(json => {
       if (!json.message){
-        let normalizedData = decksNormalizer(json.decks)
-        dispatch(setDecksandCards(normalizedData.entities))
-        dispatch(setCurrentUser(json.username, json.id))
-        localStorage.setItem('token', json.jwt )
+        if (action === 'signup') {
+          debugger;
+          dispatch(setCurrentUser(json.username, json.id))
+          localStorage.setItem('token', json.jwt )
+        }
+        else {
+          let normalizedData = decksNormalizer(json.decks)
+          dispatch(setDecksandCards(normalizedData.entities))
+          dispatch(setCurrentUser(json.username, json.id))
+          localStorage.setItem('token', json.jwt )
+        }
       } else {
         alert(json.message)
       }
@@ -39,9 +46,13 @@ export function reauthenticateUser(){
       .then(resp => resp.json())
       .then(json => {
         if (!json.message){
-          let normalizedData = decksNormalizer(json.decks)
-          dispatch(setDecksandCards(normalizedData.entities))
-          dispatch(setCurrentUser(json.username, json.id))
+          if (json.decks.length === 0 ) {
+            dispatch(setCurrentUser(json.username, json.id))
+          } else {
+            let normalizedData = decksNormalizer(json.decks)
+            dispatch(setDecksandCards(normalizedData.entities))
+            dispatch(setCurrentUser(json.username, json.id))
+          }
         } else {
           alert(json.message)
         }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { Grid, Button, Icon } from 'semantic-ui-react'
 
 
 class PlayCardsContainer extends React.Component {
@@ -36,17 +37,30 @@ class PlayCardsContainer extends React.Component {
     let cardId = this.props.deck.cards[this.state.counter]
     let card = this.props.cards.byId[cardId]
     return (
-      <div>
-      <Link to='/decks'> Home </Link>
-      <Link to={`/decks/${this.props.deck.id}`}> Deck </Link>
+      <div className='single-card-containter'>
+        <Grid.Row>
+          <div className='flip-card-single' onClick={this.handleFlip}>
+           {this.state.clicked ?  <div className='flip-card-content'> <h4>A.</h4> <p>{card.answer}</p></div> : <div className='flip-card-content'> <h4>Q.</h4>  <p>{card.question}</p></div>}
+         </div>
+       </Grid.Row>
+        <Grid.Row>
         <div>
-          <div onClick={this.handleFlip}>
-           {this.state.clicked ? <div> {card.answer} </div> : <div> {card.question}
-           </div>}
-          </div>
-            {this.state.counter === 0 ? null : <button onClick={this.handleBack}> Back </button>}
-            {this.state.counter === this.props.deck.cards.length-1 ? null : <button onClick={this.handleNext}> Next </button>}
+            {this.state.counter === 0 ? null : (
+              <Button animated onClick={this.handleBack}>
+                  <Button.Content visible>back</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name='arrow left' />
+                  </Button.Content>
+                </Button>)}
+            {this.state.counter === this.props.deck.cards.length-1 ? null : (
+              <Button animated onClick={this.handleNext}>
+                <Button.Content visible>next</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='right arrow' />
+                </Button.Content>
+              </Button>)}
         </div>
+      </Grid.Row>
       </div>
     )
   }

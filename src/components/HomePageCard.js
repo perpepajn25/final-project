@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { deleteCard } from '../actions/cardActions.js'
 import EditCardForm from './EditCardForm'
+import { Button } from 'semantic-ui-react'
 
 class HomePageCard extends React.Component{
   state = {
@@ -29,12 +30,19 @@ class HomePageCard extends React.Component{
     return (
       <div>
       { this.state.isBeingEditted ? <EditCardForm onEdit={this.toggleEdit} card={this.props}/> :
-          (<div>
-          <button onClick={this.handleDelete}> Delete Card </button>
-          <button onClick={this.handleEdit}> Edit Card </button>
-            <div> {this.props.question} </div>
-            <div> {this.props.answer} </div>
-          </div>)
+          (<div className='homepage-card'>
+            <div className='card-buttons'>
+              <Button size='tiny' onClick={this.handleDelete} icon='trash'/>
+              <Button size='tiny' onClick={this.handleEdit} icon='write'/>
+            </div>
+            <div className='question'>
+              <h4> {this.props.question} </h4>
+            </div>
+            <div className='answer'>
+              <h4> {this.props.answer} </h4>
+            </div>
+          </div>
+            )
       }
     </div>
   )}

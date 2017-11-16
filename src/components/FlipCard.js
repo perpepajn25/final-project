@@ -15,11 +15,9 @@ class FlipCard extends React.Component{
 
   render () {
     return (
-      <div>
-        <div onClick={this.handleFlip}>
-         {this.state.clicked ? <div> {this.props.answer} </div> : <div> {this.props.question} </div> }
+        <div className='flip-card' onClick={this.handleFlip}>
+         {this.state.clicked ?  <div className='flip-card-content'> <h5>A.</h5> {this.props.answer}</div> : <div className='flip-card-content'> <h5>Q.</h5>  {this.props.question}</div>}
        </div>
-    </div>
   )
   }
 }

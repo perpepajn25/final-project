@@ -12,10 +12,12 @@ class FlashCardsContainer extends React.Component {
     })
     return (
       <div>
-      <Link to='/decks'> Home </Link>
-      <Link to={`/decks/${this.props.deck.id}`}> Deck </Link>
       <Link to={`/decks/${this.props.deck.id}/flashcards/play`}> Play </Link>
-       {cards}
+        <div className='container'>
+          <div className='flex-container'>
+           {cards}
+          </div>
+        </div>
       </div>
     )
   }

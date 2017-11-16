@@ -3,9 +3,11 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Login from './components/LoginForm'
 import Signup from './components/SignupForm'
 import Home from './components/Home'
+import './App.css';
 import { connect } from 'react-redux'
 import { reauthenticateUser } from './actions/loginUser.js'
 import { userIsAuthenticated, userIsNotAuthenticated } from './auth'
+import MyMenu from './components/MyMenu'
 
 class App extends Component {
 
@@ -18,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2> Welcome ! </h2>
+        <MyMenu />
         <Switch>
           <Route path='/decks' component={userIsAuthenticated(Home)}/>
           <Route exact path='/login' component={userIsNotAuthenticated(Login)}/>
