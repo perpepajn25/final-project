@@ -8,12 +8,15 @@ import { connect } from 'react-redux'
 import { reauthenticateUser } from './actions/loginUser.js'
 import { userIsAuthenticated, userIsNotAuthenticated } from './auth'
 import MyMenu from './components/MyMenu'
+import PublicDeckContainer from './components/PublicDeckContainer'
+import { fetchPublicDecks } from './actions/publicDeckActions.js'
 
 class App extends Component {
 
-  componentWillMount () {
+  componentDidMount () {
     if (localStorage.getItem('token')){
       this.props.reauthenticateUser()
+      this.props.fetchPublicDecks()
     }
   }
 
@@ -34,4 +37,4 @@ class App extends Component {
 
 
 
-export default withRouter(connect(null, { reauthenticateUser })(App))
+export default withRouter(connect(null, { reauthenticateUser, fetchPublicDecks })(App))

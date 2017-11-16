@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { Grid, Button, Form, Icon } from 'semantic-ui-react'
 
 
-class WrittenCardsContainer extends React.Component {
+class PublicWrittenCardsContainer extends React.Component {
 
   state = {
     counter: 0,
@@ -89,9 +89,9 @@ function shuffleArray(deckCards) {
 }
 
 function mapStateToProps(state,ownProps){
-  let deck = state.decks.byId[ownProps.match.params.id]
+  let deck = state.publicDecks.byId[ownProps.match.params.id]
   return { deck: {id: deck.id, title: deck.title, cards: shuffleArray(deck.cards)},
-    cards: state.cards }
+    cards: state.publicCards }
 }
 
-export default withRouter(connect(mapStateToProps)(WrittenCardsContainer))
+export default withRouter(connect(mapStateToProps)(PublicWrittenCardsContainer))

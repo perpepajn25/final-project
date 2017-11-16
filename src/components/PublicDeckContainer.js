@@ -1,8 +1,8 @@
 import React from 'react'
-import Deck from './Deck'
+import PublicDeck from './PublicDeck'
 import { connect } from 'react-redux'
 
-class DeckContainer extends React.Component{
+class PublicDeckContainer extends React.Component{
 
   state = {
     input: ''
@@ -15,18 +15,18 @@ class DeckContainer extends React.Component{
   }
 
   render(){
-    let filteredDecks = this.props.decks.filter((deck)=>{
+    let filteredDecks = this.props.publicDecks.filter((deck)=>{
       return deck.title.toLowerCase().includes(this.state.input.toLowerCase()) || deck.subject.toLowerCase().includes(this.state.input.toLowerCase())
     })
     let decks = filteredDecks.map((deck)=>{
-      return <Deck key={deck.id} {...deck}/>
+      return <PublicDeck key={deck.id} {...deck}/>
     })
     return (
       <div>
         <div className='ui icon input search-decks-div'>
           <input className='search-decks' onChange={this.handleChange}
             type='text'
-            placeholder={'Search your Dex by Title or Category'}
+            placeholder={'Search public Dex by Title or Category'}
             value={this.state.input}/>
           <i className='circular search link icon'></i>
         </div>
@@ -41,7 +41,7 @@ class DeckContainer extends React.Component{
 }
 
 function mapStateToProps(state){
-  return { decks: Object.values(state.decks.byId) }
+  return { publicDecks: Object.values(state.publicDecks.byId) }
 }
 
-export default connect(mapStateToProps)(DeckContainer)
+export default connect(mapStateToProps)(PublicDeckContainer)

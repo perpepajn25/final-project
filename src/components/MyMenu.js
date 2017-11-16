@@ -8,9 +8,6 @@ import { connect } from 'react-redux'
 
 class MyMenu extends React.Component {
 
-  state = { activeItem: 'home' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   handleLogout = (event) => {
     event.preventDefault()
@@ -20,7 +17,6 @@ class MyMenu extends React.Component {
 
 
   render() {
-    const { activeItem } = this.state
 
     return (
     this.props.username ?
@@ -34,9 +30,9 @@ class MyMenu extends React.Component {
         </Grid.Column>
         <Grid.Column width={9}>
           <Menu inverted secondary>
-              <Menu.Item as={Link} to='/decks' className="menu-item" name='home' active={activeItem === 'home'} onClick={this.handleItemClick}/>
-              <Menu.Item as={Link} to='/decks/new' className="menu-item" name='create deck' active={activeItem === 'create deck'} onClick={this.handleItemClick}/>
-              <Menu.Item as={Link} to='/public_decks' name='search public decks' active={activeItem === 'search public decks'} onClick={this.handleItemClick}/>
+              <Menu.Item as={Link} to='/decks' className="menu-item" name='home' />
+              <Menu.Item as={Link} to='/decks/new' className="menu-item" name='create deck' />
+              <Menu.Item as={Link} to='/decks/public' name='search public decks' />
             <Menu.Menu position='right'>
               <Menu.Item> Hello, {this.props.username}!</Menu.Item>
               <Menu.Item>
